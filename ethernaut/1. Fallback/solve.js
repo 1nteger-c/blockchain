@@ -1,7 +1,6 @@
 const ethers = require("ethers");
 require("dotenv").config({path : '../.env'});
 log = console.log;
-const instance = "0xbcAc2aE7E3Df8D34826d10892FAF3CEc6819889d"; // you should write the result of "newInstance.js"
 
 (async () => {
   const Network = `https://rinkeby.infura.io/v3/${process.env.INFURA_KEY}`;
@@ -19,7 +18,7 @@ const instance = "0xbcAc2aE7E3Df8D34826d10892FAF3CEc6819889d"; // you should wri
      // 없는 함수 호출 시, receive 함수가 호출된다는 특성을 이용
   ];
 
-  const contract = new ethers.Contract(instance, ABI, account);
+  const contract = new ethers.Contract(process.env.INSTANCE, ABI, account);
 
   // 1. send 0.0001 Ether
   await contract.contribute({value:ethers.utils.parseEther('0.0001'), gasLimit : 2e6});
