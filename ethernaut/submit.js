@@ -2,7 +2,6 @@ const fetch = require("node-fetch");
 const ethers = require("ethers");
 require("dotenv").config();
 log = console.log;
-const instance = "0xbcAc2aE7E3Df8D34826d10892FAF3CEc6819889d"; // you should write the result of "newInstance.js"
 
 (async () => {
   const Network = `https://rinkeby.infura.io/v3/${process.env.INFURA_KEY}`;
@@ -20,7 +19,7 @@ const instance = "0xbcAc2aE7E3Df8D34826d10892FAF3CEc6819889d"; // you should wri
   const contract = new ethers.Contract(process.env.ETHERNAUT, abi, account);
 
   // call "submitLevelInstance" function
-  await contract.submitLevelInstance(instance);
+  await contract.submitLevelInstance(process.env.INSTANCE);
   
   // wait for the "LevelCompletedLog" Event occur 
   await contract.once("LevelCompletedLog", (address, level) => {
