@@ -16,6 +16,8 @@
 - ETHERSCAN_API_KEY : 개인의 Etherscan API KEY
 ### c) 문제마다 바뀌는 값
 - LEVEL : Level Contract address (각 문제의 URL을 보면 쉽게 확인 가능)
+- INSTANCE : `newInstance.js`의 결과를 입력
+    * 추후 자동으로 .env 값을 바꿔주도록 코드 변경 예정
 
 ## 2. newInstance.js
 - 각 문제에서 사용할 Instance를 생성해주는 코드
@@ -24,9 +26,7 @@
 ## 3. submit.js
 - 문제에서 요구하는 것들을 모두 만족한 후에 실행하는 제출 코드
 - 만약 문제가 해결되었다면, `[!! CLEAR !!]` 라고 출력됨
-- `newInstance.js`의 결과를 반영한 후 사용
 
 ## 4. solve.js
 - 풀이 코드
 - 작성 방법을 잘 모르겠다면 `1. FALLBACK/solve.js` 참고
-- `newInstance.js`의 결과를 반영한 후 사용
