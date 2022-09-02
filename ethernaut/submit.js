@@ -20,10 +20,12 @@ log = console.log;
 
   // call "submitLevelInstance" function
   await contract.submitLevelInstance(process.env.INSTANCE);
-  
-  // wait for the "LevelCompletedLog" Event occur 
-  await contract.once("LevelCompletedLog", (address, level) => {
-    log(`[!! CLEAR !!]`)
-    log(`Level Instance : ${level}`)
+  log(`Listening the event ...`)
+  // wait for the "LevelCompletedLog" Event occur
+  contract.on("LevelCompletedLog", (address, level) => {
+    if (address ==account.address){
+      log(`[!! CLEAR !!]`)
+      log(`Level Instance : ${level}`)
+    }
   });
 })();
