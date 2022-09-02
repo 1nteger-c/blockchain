@@ -1,6 +1,6 @@
 require("@nomiclabs/hardhat-waffle");
 require("dotenv").config({path : '../.env'});
-require("./utils.js").imports(); // in test scripts, I use set & get
+require("../utils.js").imports(); // in test scripts, I use set & get
 module.exports = {
   solidity: "0.8.15",
   defaultNetwork : "localhost",
