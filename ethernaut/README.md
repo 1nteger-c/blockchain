@@ -14,14 +14,13 @@
 - INFURA_KEY : 개인의 Infura API KEY
 - METAMASK_PRIVATE_KEY : 사용자 Wallet의 private key 
 - ETHERSCAN_API_KEY : 개인의 Etherscan API KEY
-### c) 문제마다 바뀌는 값
-- LEVEL : Level Contract address (각 문제의 URL을 보면 쉽게 확인 가능)
-- INSTANCE : `newInstance.js`의 결과를 입력
-    * 추후 자동으로 .env 값을 바꿔주도록 코드 변경 예정
+
+### c) Level Contract address
+- 각 레벨 컨트랙트 주소
 
 ## 2. newInstance.js
 - 각 문제에서 사용할 Instance를 생성해주는 코드
-- `.env`의 LEVEL 값을 바꿔주고 실행하면, Instance 주소가 출력됨
+- `node newInstance.js ${level}` 을 실행하면 Instance 주소가 출력되고 .env에 업데이트
 
 ## 3. submit.js
 - 문제에서 요구하는 것들을 모두 만족한 후에 실행하는 제출 코드
