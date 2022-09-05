@@ -7,5 +7,8 @@
   );
   const owner = await contract.owner()
   log(`owner : ${owner}`)
-  log(`con : ${contract.address}`)
+  if (owner == account.address){
+    log(`You are owner !!`)
+  }
 })();
+ 
