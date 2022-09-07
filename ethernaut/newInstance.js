@@ -32,9 +32,9 @@ require("dotenv").config();
   const contract = new ethers.Contract(process.env.ETHERNAUT, abi, account);
 
   // call "createLevelInstance" function
-  await contract.createLevelInstance(process.env['LEVEL' + level]);
+  await contract.createLevelInstance(process.env['LEVEL' + level], {gasLimit: 2e6});
   
-  // wait for the "LevelInstanceCreatedLog" Event occur 
+  // // wait for the "LevelInstanceCreatedLog" Event occur 
   log(`Listening the event ...`)
   contract.on("LevelInstanceCreatedLog", (address, instance) => {
     if (address ==account.address){
