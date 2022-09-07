@@ -30,9 +30,14 @@ require("dotenv").config();
 
   // get Contract
   const contract = new ethers.Contract(process.env.ETHERNAUT, abi, account);
-
+  
+  // specific level require some Ether
+  Option = {}
+  if (level == 9){
+    Option = {value: ethers.utils.parseEther("0.001")};
+  }
   // call "createLevelInstance" function
-  await contract.createLevelInstance(process.env['LEVEL' + level], {gasLimit: 2e6});
+  await contract.createLevelInstance(process.env['LEVEL' + level], Option);
   
   // // wait for the "LevelInstanceCreatedLog" Event occur 
   log(`Listening the event ...`)
