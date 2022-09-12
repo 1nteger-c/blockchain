@@ -33,8 +33,9 @@ require("dotenv").config();
   
   // specific level require some Ether
   Option = {}
+  Option['gasLimit'] = 30000000
   if (level == 9){
-    Option = {value: ethers.utils.parseEther("0.001")};
+    Option['value'] = ethers.utils.parseEther("0.001");
   }
   // call "createLevelInstance" function
   await contract.createLevelInstance(process.env['LEVEL' + level], Option);
