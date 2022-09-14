@@ -33,8 +33,8 @@ require("dotenv").config();
   
   // specific level require some Ether
   Option = {}
-  Option['gasLimit'] = 30000000
-  if (level == 9){
+  // Option['gasLimit'] = 3e7
+  if (level == 9 || level == 10){
     Option['value'] = ethers.utils.parseEther("0.001");
   }
   // call "createLevelInstance" function
