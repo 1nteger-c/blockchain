@@ -17,29 +17,32 @@ require("dotenv").config();
     log(` - LEVEL_NUM :  1 ~ 26`)
     process.exit(-1)
   }
-  const Network = `https://rinkeby.infura.io/v3/${process.env.INFURA_KEY}`;
-  // Connect
+  const Network = `https://goerli.infura.io/v3/${process.env.INFURA_KEY}`;
+  // // Connect
   const httpProvider = ethers.getDefaultProvider(Network);
   const account = new ethers.Wallet(
     process.env.METAMASK_PRIVATE_KEY,
     httpProvider
   );
   // get abi
-  URL = `https://api-rinkeby.etherscan.io/api?module=contract&action=getabi&address=${process.env.ETHERNAUT}&apikey=${process.env.ETHERSCAN_API_KEY}`;
-  abi = (await (await fetch(URL)).json()).result;
 
-  // get Contract
+  abi= [
+    'function createLevelInstance(address _level) public payable',
+    'event LevelInstanceCreatedLog(address indexed player, address instance)'
+  ]
+  // // get Contract
   const contract = new ethers.Contract(process.env.ETHERNAUT, abi, account);
   
-  // specific level require some Ether
+  // // specific level require some Ether
   Option = {}
-  // Option['gasLimit'] = 3e7
+  Option['gasLimit'] = 0x600000
+  Option['gasPrice'] = 8000000
+  
   if (level == 9 || level == 10){
     Option['value'] = ethers.utils.parseEther("0.001");
   }
-  // call "createLevelInstance" function
-  await contract.createLevelInstance(process.env['LEVEL' + level], Option);
-  
+  // // call "createLevelInstance" function
+  tx = await contract.createLevelInstance(process.env['LEVEL' + level], Option);
   // // wait for the "LevelInstanceCreatedLog" Event occur 
   log(`Listening the event ...`)
   contract.on("LevelInstanceCreatedLog", (address, instance) => {
@@ -48,4 +51,4 @@ require("dotenv").config();
       setEnv('INSTANCE',instance)
     }
   });
-})();
+})(); 

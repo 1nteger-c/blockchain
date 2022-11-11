@@ -4,7 +4,7 @@ require("dotenv").config();
 log = console.log;
 
 (async () => {
-  const Network = `https://rinkeby.infura.io/v3/${process.env.INFURA_KEY}`;
+  const Network = `https://goerli.infura.io/v3/${process.env.INFURA_KEY}`;
   // Connect
   const httpProvider = ethers.getDefaultProvider(Network);
   const account = new ethers.Wallet(
@@ -12,9 +12,10 @@ log = console.log;
     httpProvider
   );
   // get abi
-  URL = `https://api-rinkeby.etherscan.io/api?module=contract&action=getabi&address=${process.env.ETHERNAUT}&apikey=${process.env.ETHERSCAN_API_KEY}`;
-  abi = (await (await fetch(URL)).json()).result;
-
+  abi= [
+    'function submitLevelInstance(address _instance) public',
+    'event LevelCompletedLog(address indexed player, address level)'
+  ]
   // get Contract
   const contract = new ethers.Contract(process.env.ETHERNAUT, abi, account);
 
@@ -23,6 +24,8 @@ log = console.log;
   log(`Listening the event ...`)
   // wait for the "LevelCompletedLog" Event occur
   contract.on("LevelCompletedLog", (address, level) => {
+    log(address)
+    log(level)
     if (address ==account.address){
       log(`[!! CLEAR !!]`)
       log(`Level Instance : ${level}`)
